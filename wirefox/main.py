@@ -4,6 +4,8 @@ from redcmd.api import maincmd, execute_commandline
 from .firefox_paths import FirefoxPaths
 from .firefox_ui_builder import *
 from .firefox_ui_filter import *
+from .db.moz_places import *
+
 
 def main2():
     fpaths = FirefoxPaths()
@@ -17,7 +19,7 @@ def main2():
 
     print(fui)
 
-@maincmd
+#@maincmd
 def filter(title='.*', url='.*', window=None, tab=None):
     f = FirefoxUIFilter(title=title, url=url, window=window, tab=tab)
     res = f.result()
@@ -29,3 +31,9 @@ def filter(title='.*', url='.*', window=None, tab=None):
 
 def main():
     execute_commandline()
+
+
+@maincmd
+def db(url=None, title=None, start=None, end=None, period=None):
+    mp = MozPlaces()
+    mp.query(url=url, title=title, start_time=start, end_time=end, period=period)
